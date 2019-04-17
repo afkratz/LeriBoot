@@ -1,0 +1,82 @@
+r1 = 63 //Comments in LeriA can be written directly into the code as long as they are after the instruction in a line. The assembler ignores anything that isn't a valid instruction
+JTA = r1 //these first three lines set a register equal to 63, then set the jump-target to that register, then jump to the jump-target
+jump true //this maintains most of the first 64 bytes of ram as empty and easilly accessible by pointers. Leri can only assign 6 bits(0-63) to a register in one command, so these addresses are the fastest to get to arbitrarily.
+
+
+
+
+value 74 points at the RAM address storing the data that we send to the flash to configure it to output serially
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+r3 = 1 //we're gonna need to be able to increment things by 1, so put 1 in r3
+r2 = 8 //point r2 at the pointer that points to the flash data
+r2 = ram r2 //use r2 as a pointer to grab value 72 from ram(8). now r2=72
+
+r1 = ram r2 use r2 
+flash r1
+r2 = r2 + r3 
+
+
+
+
+value 10 0000
+value 00 0000
+value 00 0000
+value 00 0000
+value 00 0000
+value 00 0000
+value 00 0000
+value 00 1111
+value 00 1111
