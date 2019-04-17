@@ -5,7 +5,6 @@ jump true //this maintains most of the first 64 bytes of ram as empty and easill
 
 
 
-value 74 points at the RAM address storing the data that we send to the flash to configure it to output serially
 
 
 
