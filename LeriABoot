@@ -59,6 +59,7 @@ value 106 //this is the start of the flash reading loop
 
 
 
+
 r1 = b100000 
 flash r1 //one bit sent
 r1 = b000000 
