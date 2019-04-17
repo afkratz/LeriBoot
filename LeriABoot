@@ -60,23 +60,43 @@ value 74 points at the RAM address storing the data that we send to the flash to
 
 
 
-r3 = 1 //we're gonna need to be able to increment things by 1, so put 1 in r3
-r2 = 8 //point r2 at the pointer that points to the flash data
-r2 = ram r2 //use r2 as a pointer to grab value 72 from ram(8). now r2=72
-
-r1 = ram r2 use r2 
+r1 = b100000 
+flash r1 //one bit sent
+r1 = b000000 
+flash r1 //bit two
+flash r1 //bit three 
+flash r1 //bit four 
+flash r1 //five
+flash r1 //six
+r1 = b001111 seven and eight are ones
+flash r1 //seven
+flash r1 //eight
+r1 = b000000 going to send address 0
+flash r1 
 flash r1
-r2 = r2 + r3 
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1
+flash r1 // wow we just send 0000 to the chips 24 times! now the chips will start sending us bits from flash memory one each at a time untill we flash them 010000 to turn them off
 
 
 
 
-value 10 0000
-value 00 0000
-value 00 0000
-value 00 0000
-value 00 0000
-value 00 0000
-value 00 0000
-value 00 1111
-value 00 1111
