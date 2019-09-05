@@ -1,0 +1,5 @@
+//the flash memory LERI uses is arranged into 4096 byte sectors. In order for any byte to be rewritten, the entire sector must be erased. To simplify this process and ensure that i don't accidentally erase things, LERI will, be default, use one sector as the defaut memory chunk. 
+//we are using four chips in parallel with eachother, which means we have 4096 bytes * 8 bits per byte* 4 parallel chips = 131072kiloBits per sector
+//since Leri's word size is 16 bits, that translates to 8192 kilowords per sector. LERI could hypothetically hold 7 of these sectors in memory at once, leaving another 8192 words for instructions.
+//this function takes as an argument one word to code for which 4096 block to grab from memory, one word to code for address to jump back to after completion, and one word to code for which address to insert the 8000 words in. 
+//this function will work natively with FlashBlockSaver, which will insert data in the correct order to save a sector back onto the chip so that it can be retreived consistently with the storage.
