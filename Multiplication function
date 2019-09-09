@@ -1,0 +1,30 @@
+multiplication return value: Jump here to start multiplying. r0 contains value to jump back to, r1 contains x, r2 contains y r0 address to return to, r1 = x, r2 = y, r3 = answer, r4 = ZAO, r5 = final address, r6 & r7 = math 
+r3 = d0 // holder
+r4 = ZAO*// zero address offset. Whatever absolute address this program is installed at. For instance, if line 1 was line 1001, then r4 would be 1000. 
+r4 = ram r4 //ZAO proper. r4 now points at line 1. 
+label Start
+r5 = label end
+r5 = r4 + r5 //normalize the address
+jta = r5
+r7 = 0
+jump r1 = r7 // if r1 = 0, jump to end
+  r5 = label odd
+  r5 = r4 + r5
+  jta = r5
+jump odd r1 // if r1 is odd, goto label odd
+  r2 = r2 + r2 // if we're here, then r1 wasn't odd, so it's even. double y
+  r1 = >>r1 //half x
+  r5 = label start
+  r5 = r4 + r5
+  jta = r5
+jump true //jump back to start
+label odd
+  r3 = r3 + r2 // increase answer by y
+  r1 = r1 + r7 // decrease r1,x by 1,
+  r5 = label start
+  r5 = r4 + r5
+  jta = r5
+jump true
+label end
+jta = r0
+jump true
