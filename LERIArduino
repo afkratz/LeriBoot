@@ -1,0 +1,76 @@
+r1 = d1    //start
+r2 = d7
+r3 = d0
+r5 = d11
+r4 = ram r5
+r5 = d12
+r6 = ram r5
+jta = r6
+jump true
+
+d1000
+d20 KEYREADING
+d28 WRITE
+d41 WRITE ONE
+d45 CLEAN UP
+d57 SEND IT
+d67 WAIT
+
+
+	//keyreading jump here
+r0 = key	//arduino is connected to the keyboard bus
+jump r0 < r1 //
+r5 = d13  
+r6 = ram r5 // grab value from ram address 13
+jta = r6 	//set jump target as that
+jump true	//then jump to it.
+
+	// write starts here
+r7 = d1
+r2 = r2 + r7 //r2 is a counter of how many bits have been written. when it gets to 16 (a full word), then we'll send it to ram
+r3 = r3 + r3 //r3 is the growing word we're getting one bit at a time. this doubles it, which shifts it right by one bit
+r5 = d14 //point at ram
+r6 = ram r5 //getit
+jta = r6 
+jump r0 odd //r0 is what we got from the arduino. if it's a zero, then we don't need to do anything else. if it's a 1, then we need to add one to the growing word.
+r5 = d15
+r6 = ram r5
+jta = r6
+jump true
+
+	//write one
+r7 = d1
+r3 = r3 + r7
+
+	//clean up
+r5 = d16
+r6 = ram r5
+jta = r6
+r7 = d16
+jump r2 = r7
+r5 = d17
+r6 = ram r5
+jta = r6
+jump true
+
+	//send it
+r7 = d0
+r7 = ! r7 //all ones
+r5 = d11 // address 1000
+r6 = ram r5
+jta = r6
+jump r3 = r7 // if we sent FFFF then jump to instruction 1000, which is where we started writing the data we got from arduino
+ram r4 = r3
+r7 = d1
+r4 = r4 + r7
+
+	//wait
+r5 = d17
+r6 = ram r5
+jta = r6
+r0 = key
+jump r0 > r1
+r5 = d12
+r6 = ram r5
+jta = r6
+jump true
